@@ -1,32 +1,29 @@
 // -----------------------------------------------------------------------------
 // IMAGE + CONTENT MANAGEMENT SYSTEM
 // -----------------------------------------------------------------------------
-// All placeholder imagery + editorial copy live here so they can be swapped for
-// approved Camila Reyes assets later WITHOUT touching component code.
-// Each image carries metadata: category, caption and alt text.
+// Camila Reyes real (AI-generated) photos live in /public/camila and are used
+// in every slot where the character appears. Scenery/object placeholders remain
+// Unsplash/Pexels and are easily swappable later.
 // -----------------------------------------------------------------------------
 
-// Optimises a raw image URL for delivery (width + format). Handles both
-// Unsplash and Pexels query-param conventions.
 export function opt(url, w = 1200) {
   const sep = url.includes('?') ? '&' : '?';
   if (url.includes('pexels')) return `${url}${sep}auto=compress&cs=tinysrgb&w=${w}`;
   return `${url}${sep}auto=format&fit=crop&w=${w}&q=80`;
 }
 
-// --- Raw source URLs (grouped for clarity) ----------------------------------
-const ED1 = 'https://images.unsplash.com/photo-1579809011670-aa21121f5ec6';
-const ED2 = 'https://images.unsplash.com/photo-1602595635615-d3af74c8d56c';
-const ED3 = 'https://images.unsplash.com/photo-1544005313-94ddf0286df2';
-const ED4 = 'https://images.unsplash.com/photo-1557053910-d9eadeed1c58';
+// --- Camila Reyes photos (person shots) -------------------------------------
+const HERO_IMG = '/camila/hero.jpg';       // reclining, golden-hour coastline
+const ABOUT_IMG = '/camila/about.jpg';     // over-the-shoulder portrait
+const FASHION_IMG = '/camila/fashion.jpg'; // backlit editorial portrait
+const LIFESTYLE_IMG = '/camila/lifestyle.jpg'; // relaxed golden-hour
+const TRAVEL_IMG = '/camila/travel.jpg';   // Positano coastline
+
+// --- Scenery / object placeholders (no person) ------------------------------
 const ED5 = 'https://images.unsplash.com/photo-1667400104797-132f6be037ce';
 const ED6 = 'https://images.unsplash.com/photo-1527683040093-3a2b80ed1592';
 const ED7 = 'https://images.unsplash.com/photo-1601740289404-6d0dca1bc904';
-const PX1 = 'https://images.pexels.com/photos/36305657/pexels-photo-36305657.jpeg';
-const PX2 = 'https://images.pexels.com/photos/34726645/pexels-photo-34726645.jpeg';
-const PX3 = 'https://images.pexels.com/photos/35644544/pexels-photo-35644544.jpeg';
 const PX4 = 'https://images.pexels.com/photos/16408792/pexels-photo-16408792.jpeg';
-const PX5 = 'https://images.pexels.com/photos/6467628/pexels-photo-6467628.jpeg';
 const TRV1 = 'https://images.unsplash.com/photo-1500835556837-99ac94a94552?crop=entropy&cs=srgb&fm=jpg&q=85';
 const TRV2 = 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?crop=entropy&cs=srgb&fm=jpg&q=85';
 const TRV3 = 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?crop=entropy&cs=srgb&fm=jpg&q=85';
@@ -40,38 +37,18 @@ const FAS1 = 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?crop=ent
 const FAS2 = 'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?crop=entropy&cs=srgb&fm=jpg&q=85';
 const FAS3 = 'https://images.unsplash.com/photo-1483985988355-763728e1935b?crop=entropy&cs=srgb&fm=jpg&q=85';
 
-export const heroImage = opt(ED1, 1800);
-export const aboutImage = opt(ED3, 1100);
+export const heroImage = HERO_IMG;
+export const aboutImage = ABOUT_IMG;
 
 export const features = [
-  {
-    key: 'lifestyle',
-    title: 'Lifestyle',
-    description: 'Slow mornings, cosy corners and the small rituals that make a day feel intentional.',
-    image: opt(ED6, 900),
-  },
-  {
-    key: 'fashion',
-    title: 'Fashion',
-    description: 'Elevated everyday looks, seasonal edits and the accessories that pull it together.',
-    image: opt(ED2, 900),
-  },
-  {
-    key: 'fitness',
-    title: 'Fitness',
-    description: 'Movement as self-care — mindful workouts, wellness rituals and gentle strength.',
-    image: opt(FIT1, 900),
-  },
-  {
-    key: 'travel',
-    title: 'Travel',
-    description: 'Dreamy destinations, hidden corners and the stories collected along the way.',
-    image: opt(TRV3, 900),
-  },
+  { key: 'lifestyle', title: 'Lifestyle', description: 'Slow mornings, cosy corners and the small rituals that make a day feel intentional.', image: LIFESTYLE_IMG },
+  { key: 'fashion', title: 'Fashion', description: 'Elevated everyday looks, seasonal edits and the accessories that pull it together.', image: FASHION_IMG },
+  { key: 'fitness', title: 'Fitness', description: 'Movement as self-care — mindful workouts, wellness rituals and gentle strength.', image: opt(FIT1, 900) },
+  { key: 'travel', title: 'Travel', description: 'Dreamy destinations, hidden corners and the stories collected along the way.', image: TRAVEL_IMG },
 ];
 
 export const latestContent = [
-  { category: 'Fashion', title: 'Autumn Layers I’m Loving', date: 'Jun 2, 2025', image: opt(ED4, 800) },
+  { category: 'Fashion', title: 'Autumn Layers I’m Loving', date: 'Jun 2, 2025', image: FASHION_IMG },
   { category: 'Travel', title: 'A Slow Morning by the Sea', date: 'May 28, 2025', image: opt(TRV1, 800) },
   { category: 'Fitness', title: 'Reset: My Wellness Ritual', date: 'May 21, 2025', image: opt(WEL1, 800) },
   { category: 'Lifestyle', title: 'Blush Tones & Quiet Days', date: 'May 14, 2025', image: opt(ED7, 800) },
@@ -79,60 +56,46 @@ export const latestContent = [
   { category: 'Travel', title: 'Mountains on the Mind', date: 'Apr 30, 2025', image: opt(TRV2, 800) },
 ];
 
-export const personalityTraits = [
-  'Warm', 'Confident', 'Creative', 'Curious', 'Adventurous', 'Approachable', 'Modern',
-];
+export const personalityTraits = ['Warm', 'Confident', 'Creative', 'Curious', 'Adventurous', 'Approachable', 'Modern'];
 
 export const categories = {
   lifestyle: {
-    key: 'lifestyle',
-    title: 'Lifestyle',
-    tagline: 'The art of a beautifully ordinary day',
-    intro:
-      'From quiet coffee rituals to considered interiors, Camila’s lifestyle stories celebrate intention, softness and the joy found in small everyday moments.',
+    key: 'lifestyle', title: 'Lifestyle', tagline: 'The art of a beautifully ordinary day',
+    intro: 'From quiet coffee rituals to considered interiors, Camila’s lifestyle stories celebrate intention, softness and the joy found in small everyday moments.',
     hero: opt(ED6, 1600),
-    grid: [opt(ED6), opt(ED7), opt(ED5), opt(PX4), opt(ED4), opt(PX1)],
+    grid: [LIFESTYLE_IMG, opt(ED6), opt(ED7), opt(ED5), HERO_IMG, TRAVEL_IMG],
   },
   fashion: {
-    key: 'fashion',
-    title: 'Fashion',
-    tagline: 'Elevated everyday, effortlessly styled',
-    intro:
-      'Seasonal edits, capsule wardrobes and the accessories that finish a look — a refined, feminine take on modern dressing.',
-    hero: opt(ED2, 1600),
-    grid: [opt(ED2), opt(ED4), opt(FAS1), opt(FAS2), opt(FAS3), opt(PX3)],
+    key: 'fashion', title: 'Fashion', tagline: 'Elevated everyday, effortlessly styled',
+    intro: 'Seasonal edits, capsule wardrobes and the accessories that finish a look — a refined, feminine take on modern dressing.',
+    hero: FASHION_IMG,
+    grid: [ABOUT_IMG, FASHION_IMG, opt(FAS1), opt(FAS2), opt(FAS3), TRAVEL_IMG],
   },
   fitness: {
-    key: 'fitness',
-    title: 'Fitness',
-    tagline: 'Movement as a form of self-care',
-    intro:
-      'Mindful workouts, wellness rituals and gentle strength — a balanced approach to feeling good in body and mind.',
+    key: 'fitness', title: 'Fitness', tagline: 'Movement as a form of self-care',
+    intro: 'Mindful workouts, wellness rituals and gentle strength — a balanced approach to feeling good in body and mind.',
     hero: opt(FIT1, 1600),
     grid: [opt(FIT1), opt(FIT2), opt(WEL1), opt(YOG), opt(WEL2), opt(WEL3)],
   },
   travel: {
-    key: 'travel',
-    title: 'Travel',
-    tagline: 'Collecting stories, one destination at a time',
-    intro:
-      'Dreamy coastlines, quiet mountain towns and city escapes — travel diaries designed to inspire your next slow adventure.',
+    key: 'travel', title: 'Travel', tagline: 'Collecting stories, one destination at a time',
+    intro: 'Dreamy coastlines, quiet mountain towns and city escapes — travel diaries designed to inspire your next slow adventure.',
     hero: opt(TRV3, 1600),
-    grid: [opt(TRV3), opt(TRV1), opt(TRV2), opt(WEL3), opt(PX5), opt(ED1)],
+    grid: [TRAVEL_IMG, opt(TRV1), opt(TRV2), opt(WEL3), HERO_IMG, opt(TRV3)],
   },
 };
 
 export const galleryItems = [
-  { id: 'g1', category: 'fashion', src: opt(ED1), alt: 'Editorial look with flowing fabric', caption: 'Movement & fabric' },
-  { id: 'g2', category: 'fashion', src: opt(ED2), alt: 'White editorial styling', caption: 'Clean whites' },
-  { id: 'g3', category: 'lifestyle', src: opt(ED3), alt: 'Warm natural portrait', caption: 'Golden hour' },
-  { id: 'g4', category: 'fashion', src: opt(ED4), alt: 'Warm autumn knitwear', caption: 'Autumn warmth' },
+  { id: 'g1', category: 'fashion', src: ABOUT_IMG, alt: 'Camila in a black editorial look at golden hour', caption: 'Golden hour' },
+  { id: 'g2', category: 'fashion', src: FASHION_IMG, alt: 'Camila backlit by the setting sun', caption: 'Backlit & breezy' },
+  { id: 'g3', category: 'travel', src: TRAVEL_IMG, alt: 'Camila overlooking the Positano coastline', caption: 'Positano views' },
+  { id: 'g4', category: 'lifestyle', src: LIFESTYLE_IMG, alt: 'Camila relaxing at golden hour', caption: 'Sunset glow' },
   { id: 'g5', category: 'lifestyle', src: opt(ED5), alt: 'Minimal accessory detail', caption: 'The details' },
   { id: 'g6', category: 'lifestyle', src: opt(ED6), alt: 'Coffee flatlay, cream tones', caption: 'Slow mornings' },
   { id: 'g7', category: 'lifestyle', src: opt(ED7), alt: 'Soft blush flatlay', caption: 'Blush tones' },
-  { id: 'g8', category: 'fashion', src: opt(PX1), alt: 'Beige tailored suit with coffee', caption: 'Tailored neutrals' },
-  { id: 'g9', category: 'fashion', src: opt(PX3), alt: 'White blazer portrait', caption: 'Sharp & soft' },
-  { id: 'g10', category: 'lifestyle', src: opt(PX5), alt: 'Relaxed on a sofa in white', caption: 'At ease' },
+  { id: 'g8', category: 'lifestyle', src: HERO_IMG, alt: 'Camila reclining by the coast at sunset', caption: 'Slow evenings' },
+  { id: 'g9', category: 'fashion', src: FASHION_IMG, alt: 'Camila in soft evening light', caption: 'Soft light' },
+  { id: 'g10', category: 'lifestyle', src: LIFESTYLE_IMG, alt: 'Camila at ease in golden light', caption: 'At ease' },
   { id: 'g11', category: 'travel', src: opt(TRV1), alt: 'Coastal getaway view', caption: 'By the sea' },
   { id: 'g12', category: 'travel', src: opt(TRV2), alt: 'Mountain landscape', caption: 'High places' },
   { id: 'g13', category: 'travel', src: opt(TRV3), alt: 'Whitewashed coastal village', caption: 'Blue & white' },
@@ -162,7 +125,7 @@ export const blogSeed = [
   {
     id: 'b2', slug: 'autumn-fashion-ideas', title: 'Autumn Fashion Ideas',
     category: 'Fashion', author: 'Camila Reyes', date: 'May 26, 2025', readingTime: '5 min read',
-    cover: opt(ED4, 1400),
+    cover: FASHION_IMG,
     excerpt: 'Warm layers, soft textures and the transitional pieces I reach for every autumn.',
     body: [
       'Autumn is my favourite season to dress for. The palette shifts to caramel, cream and deep rust, and everything feels a little more considered.',
@@ -184,7 +147,7 @@ export const blogSeed = [
   {
     id: 'b4', slug: 'travel-diary', title: 'Travel Diary',
     category: 'Travel', author: 'Camila Reyes', date: 'May 12, 2025', readingTime: '5 min read',
-    cover: opt(TRV3, 1400),
+    cover: TRAVEL_IMG,
     excerpt: 'Notes from a slow escape — blue shutters, warm bread and the beauty of doing very little.',
     body: [
       'The best trips, I have decided, are the ones with the least planned. This one was all whitewashed walls, blue shutters and afternoons that stretched on without agenda.',
@@ -197,7 +160,7 @@ export const blogSeed = [
 export const productSeed = [
   { id: 'p1', name: 'Mobile Wallpaper Pack', category: 'Wallpapers', type: 'digital', price: 9, image: opt(ED7, 800), description: '12 hand-picked blush & cream wallpapers for your phone.' },
   { id: 'p2', name: 'Desktop Wallpaper Set', category: 'Wallpapers', type: 'digital', price: 12, image: opt(ED5, 800), description: 'A calm, editorial set of desktop backgrounds in 4K.' },
-  { id: 'p3', name: 'Everyday Style Guide (eBook)', category: 'Guides', type: 'digital', price: 19, image: opt(ED2, 800), description: 'Build an effortless capsule wardrobe, step by step.' },
+  { id: 'p3', name: 'Everyday Style Guide (eBook)', category: 'Guides', type: 'digital', price: 19, image: FASHION_IMG, description: 'Build an effortless capsule wardrobe, step by step.' },
   { id: 'p4', name: '7-Day Wellness Reset', category: 'Guides', type: 'digital', price: 24, image: opt(WEL1, 800), description: 'A gentle week of movement, meals and mindful rituals.' },
   { id: 'p5', name: 'Creator Presets Pack', category: 'Creator Resources', type: 'digital', price: 29, image: opt(FAS1, 800), description: '10 warm, editorial Lightroom presets for a signature look.' },
   { id: 'p6', name: 'Content Planning Template', category: 'Creator Resources', type: 'digital', price: 15, image: opt(ED6, 800), description: 'A ready-to-use Notion template to plan a month of content.' },
