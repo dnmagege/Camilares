@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import {
   ArrowRight, ArrowLeft, Check, Search, ShoppingBag, Trash2, Lock,
   Sparkles, Heart, Bell, Users, Star, Calendar, Clock,
+  Plane, Dumbbell, Camera, Share2, Tag, Mail,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -62,14 +63,14 @@ export function HomeView({ go }) {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="max-w-2xl">
             <AIBadge className="bg-cream/15 text-cream border-cream/20 backdrop-blur-sm" />
             <h1 className="mt-6 text-5xl md:text-7xl lg:text-8xl font-medium leading-[0.95] tracking-tight">CAMILA REYES</h1>
-            <p className="mt-5 tracking-luxe uppercase text-sm text-cream/80">Lifestyle &middot; Fashion &middot; Fitness &middot; Travel</p>
-            <p className="mt-6 max-w-xl text-lg md:text-xl text-cream/85 leading-relaxed">{site.description}</p>
+            <p className="mt-5 tracking-luxe uppercase text-sm text-cream/80">Lifestyle &middot; Fashion &middot; Travel</p>
+            <p className="mt-6 max-w-xl text-lg md:text-xl text-cream/85 leading-relaxed">Sharing the places, moments and little things I love.</p>
             <div className="mt-9 flex flex-wrap gap-4">
-              <Button size="lg" className="rounded-full px-8 bg-cream text-charcoal hover:bg-cream/90" onClick={() => go('about')}>
-                Explore Camila <ArrowRight className="ml-1 h-4 w-4" />
+              <Button size="lg" className="rounded-full px-8 bg-cream text-charcoal hover:bg-cream/90" onClick={() => go('gallery')}>
+                Explore My World <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full px-8 border-cream/40 bg-transparent text-cream hover:bg-cream/10 hover:text-cream" onClick={() => { track('premium_click', { from: 'hero' }); go('premium') }}>
-                Join Premium
+              <Button size="lg" variant="outline" className="rounded-full px-8 border-cream/40 bg-transparent text-cream hover:bg-cream/10 hover:text-cream" onClick={() => go('work')}>
+                Work With Me
               </Button>
             </div>
             <div className="mt-10 flex items-center gap-4">
@@ -139,10 +140,10 @@ export function HomeView({ go }) {
               <div className="absolute inset-0 bg-charcoal/70" />
               <div className="relative z-10 px-8 py-16 md:px-16 md:py-24 text-cream text-center">
                 <Eyebrow className="text-cream/70">Exclusive</Eyebrow>
-                <h2 className="mx-auto mt-3 max-w-2xl text-3xl md:text-5xl font-medium leading-tight">Discover exclusive updates and premium experiences</h2>
-                <p className="mx-auto mt-4 max-w-xl text-cream/80 text-lg">Go behind the scenes with early access, extended stories and members-only content.</p>
+                <h2 className="mx-auto mt-3 max-w-2xl text-3xl md:text-5xl font-medium leading-tight">A more personal side of Camila</h2>
+                <p className="mx-auto mt-4 max-w-xl text-cream/80 text-lg">Behind-the-scenes moments, extended stories and content shared with her premium community.</p>
                 <Button size="lg" className="mt-8 rounded-full px-9 bg-cream text-charcoal hover:bg-cream/90" onClick={() => { track('premium_click', { from: 'home_cta' }); go('premium') }}>
-                  Join Premium <ArrowRight className="ml-1 h-4 w-4" />
+                  Explore Exclusive Content <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               </div>
             </div>
@@ -154,8 +155,8 @@ export function HomeView({ go }) {
       <Section className="pt-0">
         <div className="rounded-3xl border border-border bg-secondary/40 p-8 md:p-14 text-center">
           <Eyebrow>Stay close</Eyebrow>
-          <h2 className="mx-auto mt-3 max-w-xl text-3xl md:text-4xl font-medium">Join the newsletter</h2>
-          <p className="mx-auto mt-3 max-w-md text-muted-foreground">A monthly letter with new stories, edits and early access.</p>
+          <h2 className="mx-auto mt-3 max-w-xl text-3xl md:text-4xl font-medium">Stay in Camila’s World</h2>
+          <p className="mx-auto mt-3 max-w-md text-muted-foreground">Get new stories, travel moments, fashion inspiration and exclusive updates.</p>
           <div className="mx-auto mt-7 max-w-lg text-left"><NewsletterForm source="home" /></div>
         </div>
       </Section>
@@ -400,7 +401,7 @@ const benefitIcons = [Sparkles, Heart, Star, Bell]
 export function PremiumView() {
   return (
     <>
-      <PageHero image={features[1].image} eyebrow="Premium" title="Exclusive Camila" subtitle="Discover exclusive updates, behind-the-scenes content and premium experiences." />
+      <PageHero image={features[0].image} eyebrow="Exclusive" title="Exclusive With Camila" subtitle="Some moments are meant to stay a little more personal." />
       <Section>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {premiumBenefits.map((b, i) => {
@@ -418,12 +419,12 @@ export function PremiumView() {
         </div>
         <Reveal className="mt-16">
           <div className="relative overflow-hidden rounded-3xl bg-charcoal px-8 py-16 text-center text-cream md:py-20">
-            <h2 className="mx-auto max-w-2xl text-3xl md:text-5xl font-medium leading-tight">Ready for the full experience?</h2>
-            <p className="mx-auto mt-4 max-w-lg text-cream/80">Join the premium community for early access, extended stories and members-only content.</p>
+            <h2 className="mx-auto max-w-2xl text-3xl md:text-5xl font-medium leading-tight">A more personal side of Camila</h2>
+            <p className="mx-auto mt-4 max-w-lg text-cream/80">Explore Camila’s exclusive content, behind-the-scenes moments and videos through her premium community.</p>
             <a href={site.premiumUrl} target="_blank" rel="noopener noreferrer" onClick={() => track('premium_click', { from: 'premium_page' })}>
-              <Button size="lg" className="mt-8 rounded-full px-10 bg-cream text-charcoal hover:bg-cream/90">Join Premium <ArrowRight className="ml-1 h-4 w-4" /></Button>
+              <Button size="lg" className="mt-8 rounded-full px-10 bg-cream text-charcoal hover:bg-cream/90">Explore Exclusive Content <ArrowRight className="ml-1 h-4 w-4" /></Button>
             </a>
-            <p className="mt-5 text-xs text-cream/50">You will be redirected to our external premium platform.</p>
+            <p className="mt-5 text-xs text-cream/50">External premium platform.</p>
           </div>
         </Reveal>
       </Section>
@@ -679,6 +680,95 @@ export function LegalView({ type, go }) {
         <p className="mt-10 text-sm text-muted-foreground">Last updated: June 2025.</p>
       </div>
     </Section>
+  )
+}
+
+// ===========================================================================
+// WORK WITH CAMILA (professional collaborations)
+// ===========================================================================
+const collabCards = [
+  { icon: Sparkles, title: 'Brand Collaborations', desc: 'Fashion, beauty, lifestyle and consumer brands.' },
+  { icon: Plane, title: 'Travel & Hospitality', desc: 'Hotels, destinations, tourism and travel experiences.' },
+  { icon: Dumbbell, title: 'Fitness & Wellness', desc: 'Fitness, active lifestyle and wellness brands.' },
+  { icon: Camera, title: 'Content Creation', desc: 'Photography, social content and campaign assets.' },
+  { icon: Share2, title: 'Social Campaigns', desc: 'Instagram, TikTok, YouTube and other social campaigns.' },
+  { icon: Tag, title: 'Affiliate Partnerships', desc: 'Product recommendations and lifestyle partnerships.' },
+]
+export function WorkView() {
+  const [form, setForm] = useState({ name: '', company: '', email: '', campaignType: 'Brand collaboration', budget: '', message: '' })
+  const [loading, setLoading] = useState(false)
+  const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target ? e.target.value : e }))
+  const submit = async (e) => {
+    e.preventDefault(); setLoading(true)
+    try {
+      const res = await fetch('/api/collab', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
+      const data = await res.json()
+      if (res.ok && data.success) {
+        toast.success(data.message); track('collab_submit', { type: form.campaignType })
+        setForm({ name: '', company: '', email: '', campaignType: 'Brand collaboration', budget: '', message: '' })
+      } else toast.error(data.error || 'Something went wrong.')
+    } catch (_) { toast.error('Network error, please try again.') } finally { setLoading(false) }
+  }
+  return (
+    <>
+      <PageHero image={heroImage} eyebrow="Work With Camila" title="Let’s create something memorable" subtitle="Partner with Camila on lifestyle, fashion, travel and creative campaigns." />
+      <Section>
+        <SectionTitle center eyebrow="Partnerships" title="Ways to collaborate" subtitle="From single posts to full campaigns, Camila works with brands that share her warm, considered aesthetic." />
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {collabCards.map((c, i) => (
+            <Reveal key={c.title} delay={i * 0.05}>
+              <div className="h-full rounded-2xl border border-border bg-card p-7">
+                <div className="grid h-11 w-11 place-items-center rounded-full bg-blush/40 text-charcoal"><c.icon className="h-5 w-5" /></div>
+                <h3 className="mt-5 text-lg font-medium">{c.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{c.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <section className="bg-secondary/40 py-16 md:py-24">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-start">
+            <div className="space-y-6">
+              <Eyebrow>Business enquiries</Eyebrow>
+              <h2 className="text-3xl md:text-4xl font-medium leading-tight">Interested in working with Camila?</h2>
+              <p className="text-muted-foreground text-lg leading-relaxed">Let’s create something memorable together. Share a few details about your brand and campaign, and Camila’s team will be in touch.</p>
+              <Reveal><SmartImage src={aboutImage} alt="Camila Reyes" className="aspect-[5/4] rounded-2xl" /></Reveal>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground"><Mail className="h-4 w-4" /> {site.contactEmail}</div>
+            </div>
+
+            <form onSubmit={submit} className="space-y-5 rounded-2xl border border-border bg-card p-6 md:p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div className="space-y-2"><Label>Name *</Label><Input required value={form.name} onChange={set('name')} placeholder="Your name" /></div>
+                <div className="space-y-2"><Label>Company</Label><Input value={form.company} onChange={set('company')} placeholder="Company / brand" /></div>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div className="space-y-2"><Label>Email *</Label><Input required type="email" value={form.email} onChange={set('email')} placeholder="you@brand.com" /></div>
+                <div className="space-y-2">
+                  <Label>Campaign type</Label>
+                  <Select value={form.campaignType} onValueChange={(v) => setForm((f) => ({ ...f, campaignType: v }))}>
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Brand collaboration">Brand collaboration</SelectItem>
+                      <SelectItem value="Travel & hospitality">Travel &amp; hospitality</SelectItem>
+                      <SelectItem value="Fitness & wellness">Fitness &amp; wellness</SelectItem>
+                      <SelectItem value="Content creation">Content creation</SelectItem>
+                      <SelectItem value="Social campaign">Social campaign</SelectItem>
+                      <SelectItem value="Affiliate partnership">Affiliate partnership</SelectItem>
+                      <SelectItem value="Other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-2"><Label>Budget (optional)</Label><Input value={form.budget} onChange={set('budget')} placeholder="e.g. $2,000 – $5,000" /></div>
+              <div className="space-y-2"><Label>Message *</Label><Textarea required rows={5} value={form.message} onChange={set('message')} placeholder="Tell us about your brand and the campaign you have in mind…" /></div>
+              <Button type="submit" disabled={loading} className="w-full rounded-full h-12">{loading ? 'Sending…' : 'Send enquiry'}</Button>
+            </form>
+          </div>
+        </Container>
+      </section>
+    </>
   )
 }
 

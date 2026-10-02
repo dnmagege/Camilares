@@ -8,7 +8,7 @@ import Footer from '@/components/site/Footer'
 import {
   HomeView, AboutView, CategoryView, GalleryView, BlogView, PostView,
   PremiumView, ShopView, ProductView, ContactView, DisclosureView,
-  LegalView, AuthView, DashboardView,
+  LegalView, AuthView, DashboardView, WorkView,
 } from '@/components/site/views'
 import { track } from '@/components/site/primitives'
 
@@ -49,6 +49,7 @@ function App() {
       case 'shop': return <ShopView go={go} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} />
       case 'product': return <ProductView id={param} go={go} addToCart={addToCart} />
       case 'contact': return <ContactView go={go} />
+      case 'work': return <WorkView go={go} />
       case 'ai-disclosure': return <DisclosureView go={go} />
       case 'privacy': return <LegalView type="privacy" go={go} />
       case 'cookies': return <LegalView type="cookies" go={go} />

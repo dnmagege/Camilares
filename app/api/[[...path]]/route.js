@@ -110,6 +110,26 @@ async function handleRoute(request, { params }) {
       return json({ success: true, message: 'Thank you — your message has been received.' })
     }
 
+    // --- Brand collaboration / business enquiries ---------------------------
+    if (route === '/collab' && method === 'POST') {
+      const body = await request.json()
+      if (!body.name || !isValidEmail(body.email) || !body.message) {
+        return json({ error: 'Name, a valid email and a message are required' }, 400)
+      }
+      const doc = {
+        id: uuidv4(),
+        name: body.name,
+        company: body.company || '',
+        email: body.email.toLowerCase(),
+        campaignType: body.campaignType || 'General',
+        budget: body.budget || '',
+        message: body.message,
+        createdAt: new Date(),
+      }
+      await db.collection('collaboration_enquiries').insertOne(doc)
+      return json({ success: true, message: 'Thank you — your enquiry has been received. Camila’s team will be in touch shortly.' })
+    }
+
     // --- Blog ---------------------------------------------------------------
     if (route === '/blog' && method === 'GET') {
       await ensureSeeded(db, collections.blog, blogSeed)

@@ -16,8 +16,7 @@ const NAV = [
   { key: 'travel', label: 'Travel' },
   { key: 'gallery', label: 'Gallery' },
   { key: 'blog', label: 'Blog' },
-  { key: 'shop', label: 'Shop' },
-  { key: 'contact', label: 'Contact' },
+  { key: 'work', label: 'Work With Me' },
 ]
 
 export default function Navbar({ route, go }) {
@@ -73,17 +72,17 @@ export default function Navbar({ route, go }) {
           <Button
             variant="ghost"
             size="sm"
-            className="rounded-full"
-            onClick={() => nav('login')}
+            className="rounded-full text-muted-foreground"
+            onClick={() => { track('premium_click', { from: 'navbar' }); nav('premium') }}
           >
-            Sign in
+            Premium
           </Button>
           <Button
             size="sm"
             className="rounded-full px-5"
-            onClick={() => { track('premium_click', { from: 'navbar' }); nav('premium') }}
+            onClick={() => nav('work')}
           >
-            Join Premium
+            Work With Me
           </Button>
         </div>
 
@@ -98,7 +97,7 @@ export default function Navbar({ route, go }) {
             <SheetContent side="right" className="w-[300px] bg-background">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <div className="mt-6 flex flex-col gap-1">
-                {[{ key: 'home', label: 'Home' }, ...NAV, { key: 'premium', label: 'Premium' }].map((item) => (
+                {[{ key: 'home', label: 'Home' }, ...NAV, { key: 'shop', label: 'Shop' }, { key: 'contact', label: 'Contact' }, { key: 'premium', label: 'Premium' }].map((item) => (
                   <button
                     key={item.key}
                     onClick={() => nav(item.key)}
@@ -111,8 +110,8 @@ export default function Navbar({ route, go }) {
                   </button>
                 ))}
                 <div className="mt-4 flex flex-col gap-2">
-                  <Button variant="outline" className="rounded-full" onClick={() => nav('login')}>Sign in</Button>
-                  <Button className="rounded-full" onClick={() => nav('signup')}>Create account</Button>
+                  <Button className="rounded-full" onClick={() => nav('work')}>Work With Me</Button>
+                  <Button variant="outline" className="rounded-full" onClick={() => nav('premium')}>Premium</Button>
                 </div>
               </div>
             </SheetContent>

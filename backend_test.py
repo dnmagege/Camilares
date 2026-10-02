@@ -615,6 +615,229 @@ def test_analytics():
         print(f"❌ FAILED: Exception occurred: {str(e)}")
         return False
 
+def test_collab():
+    """Test POST /api/collab endpoint (brand collaboration enquiries)"""
+    print("\n" + "="*80)
+    print("TEST: Brand Collaboration Endpoint")
+    print("="*80)
+    
+    all_passed = True
+    
+    # Test 1: Valid submission with all fields
+    print("\n--- Test 1: Valid submission with all fields ---")
+    try:
+        payload = {
+            "name": "Acme PR",
+            "company": "Acme Travel",
+            "email": "brand@acme.com",
+            "campaignType": "Travel & hospitality",
+            "budget": "$5,000",
+            "message": "Hotel campaign collaboration."
+        }
+        response = requests.post(f"{BASE_URL}/collab", json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        print(f"Response: {response.json()}")
+        
+        if response.status_code != 200:
+            print(f"❌ FAILED: Expected 200, got {response.status_code}")
+            all_passed = False
+        else:
+            data = response.json()
+            if not data.get('success'):
+                print(f"❌ FAILED: Expected success=true")
+                all_passed = False
+            else:
+                # Check no _id field
+                no_id, msg = check_no_id_field(data)
+                if not no_id:
+                    print(f"❌ FAILED: {msg}")
+                    all_passed = False
+                else:
+                    print("✅ PASSED: Valid collaboration enquiry accepted")
+        
+    except Exception as e:
+        print(f"❌ FAILED: Exception occurred: {str(e)}")
+        all_passed = False
+    
+    # Test 2: Missing name
+    print("\n--- Test 2: Missing name ---")
+    try:
+        payload = {
+            "company": "Test Corp",
+            "email": "test@example.com",
+            "message": "Test message"
+        }
+        response = requests.post(f"{BASE_URL}/collab", json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        print(f"Response: {response.json()}")
+        
+        if response.status_code != 400:
+            print(f"❌ FAILED: Expected 400, got {response.status_code}")
+            all_passed = False
+        else:
+            data = response.json()
+            if 'error' not in data:
+                print(f"❌ FAILED: Expected error field in response")
+                all_passed = False
+            else:
+                print("✅ PASSED: Missing name rejected")
+        
+    except Exception as e:
+        print(f"❌ FAILED: Exception occurred: {str(e)}")
+        all_passed = False
+    
+    # Test 3: Invalid email
+    print("\n--- Test 3: Invalid email ---")
+    try:
+        payload = {
+            "name": "John Doe",
+            "email": "notanemail",
+            "message": "Test message"
+        }
+        response = requests.post(f"{BASE_URL}/collab", json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        print(f"Response: {response.json()}")
+        
+        if response.status_code != 400:
+            print(f"❌ FAILED: Expected 400, got {response.status_code}")
+            all_passed = False
+        else:
+            data = response.json()
+            if 'error' not in data:
+                print(f"❌ FAILED: Expected error field in response")
+                all_passed = False
+            else:
+                print("✅ PASSED: Invalid email rejected")
+        
+    except Exception as e:
+        print(f"❌ FAILED: Exception occurred: {str(e)}")
+        all_passed = False
+    
+    # Test 4: Missing message
+    print("\n--- Test 4: Missing message ---")
+    try:
+        payload = {
+            "name": "Jane Smith",
+            "email": "jane@example.com"
+        }
+        response = requests.post(f"{BASE_URL}/collab", json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        print(f"Response: {response.json()}")
+        
+        if response.status_code != 400:
+            print(f"❌ FAILED: Expected 400, got {response.status_code}")
+            all_passed = False
+        else:
+            data = response.json()
+            if 'error' not in data:
+                print(f"❌ FAILED: Expected error field in response")
+                all_passed = False
+            else:
+                print("✅ PASSED: Missing message rejected")
+        
+    except Exception as e:
+        print(f"❌ FAILED: Exception occurred: {str(e)}")
+        all_passed = False
+    
+    # Test 5: Valid submission WITHOUT optional fields (company and budget)
+    print("\n--- Test 5: Valid submission without company and budget ---")
+    try:
+        payload = {
+            "name": "Sarah Johnson",
+            "email": "sarah@brandagency.com",
+            "campaignType": "Fashion",
+            "message": "Interested in fashion collaboration for spring collection."
+        }
+        response = requests.post(f"{BASE_URL}/collab", json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        print(f"Response: {response.json()}")
+        
+        if response.status_code != 200:
+            print(f"❌ FAILED: Expected 200, got {response.status_code}")
+            all_passed = False
+        else:
+            data = response.json()
+            if not data.get('success'):
+                print(f"❌ FAILED: Expected success=true")
+                all_passed = False
+            else:
+                # Check no _id field
+                no_id, msg = check_no_id_field(data)
+                if not no_id:
+                    print(f"❌ FAILED: {msg}")
+                    all_passed = False
+                else:
+                    print("✅ PASSED: Valid submission without optional fields accepted")
+        
+    except Exception as e:
+        print(f"❌ FAILED: Exception occurred: {str(e)}")
+        all_passed = False
+    
+    return all_passed
+
+def test_regression_contact_newsletter():
+    """Quick regression check for contact and newsletter endpoints"""
+    print("\n" + "="*80)
+    print("TEST: Regression Check - Contact & Newsletter")
+    print("="*80)
+    
+    all_passed = True
+    
+    # Test 1: POST /api/contact with valid payload
+    print("\n--- Test 1: POST /api/contact (regression) ---")
+    try:
+        payload = {
+            "name": "Regression Test User",
+            "email": random_email(),
+            "message": "This is a regression test message."
+        }
+        response = requests.post(f"{BASE_URL}/contact", json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        print(f"Response: {response.json()}")
+        
+        if response.status_code != 200:
+            print(f"❌ FAILED: Expected 200, got {response.status_code}")
+            all_passed = False
+        else:
+            data = response.json()
+            if not data.get('success'):
+                print(f"❌ FAILED: Expected success=true")
+                all_passed = False
+            else:
+                print("✅ PASSED: Contact endpoint still working")
+        
+    except Exception as e:
+        print(f"❌ FAILED: Exception occurred: {str(e)}")
+        all_passed = False
+    
+    # Test 2: POST /api/newsletter with valid payload
+    print("\n--- Test 2: POST /api/newsletter (regression) ---")
+    try:
+        payload = {
+            "email": random_email(),
+            "consent": True
+        }
+        response = requests.post(f"{BASE_URL}/newsletter", json=payload, timeout=10)
+        print(f"Status Code: {response.status_code}")
+        print(f"Response: {response.json()}")
+        
+        if response.status_code != 200:
+            print(f"❌ FAILED: Expected 200, got {response.status_code}")
+            all_passed = False
+        else:
+            data = response.json()
+            if not data.get('success'):
+                print(f"❌ FAILED: Expected success=true")
+                all_passed = False
+            else:
+                print("✅ PASSED: Newsletter endpoint still working")
+        
+    except Exception as e:
+        print(f"❌ FAILED: Exception occurred: {str(e)}")
+        all_passed = False
+    
+    return all_passed
+
 def main():
     """Run all tests"""
     print("\n" + "="*80)
@@ -625,14 +848,11 @@ def main():
     
     results = {}
     
-    # Run tests in priority order (high first)
-    results['newsletter'] = test_newsletter()
-    results['contact'] = test_contact()
-    results['blog'] = test_blog()
-    results['config'] = test_config()
-    results['gallery'] = test_gallery()
-    results['products'] = test_products()
-    results['analytics'] = test_analytics()
+    # Run NEW collab endpoint test first (current focus)
+    results['collab'] = test_collab()
+    
+    # Quick regression check
+    results['regression'] = test_regression_contact_newsletter()
     
     # Summary
     print("\n" + "="*80)

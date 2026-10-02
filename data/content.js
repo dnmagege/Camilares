@@ -108,6 +108,12 @@ export const galleryItems = [
   { id: 'g20', category: 'fashion', src: A('p11'), alt: 'Camila café style with greenery', caption: 'Café style' },
   { id: 'g21', category: 'lifestyle', src: A('p17'), alt: 'Camila working from a cosy home studio', caption: 'Work from home' },
   { id: 'g22', category: 'fashion', src: A('p15'), alt: 'Camila in a floral top at a café', caption: 'Floral & soft' },
+  { id: 'g23', category: 'lifestyle', src: A('p02'), alt: 'Camila in a casual everyday look', caption: 'Everyday ease' },
+  { id: 'g24', category: 'lifestyle', src: A('p21'), alt: 'Camila at her vanity with fresh flowers', caption: 'Getting ready' },
+  { id: 'g25', category: 'lifestyle', src: A('p23'), alt: 'Camila in soft knits at home', caption: 'Home comforts' },
+  { id: 'g26', category: 'lifestyle', src: A('p28'), alt: 'Camila relaxing by candlelight', caption: 'Candlelight' },
+  { id: 'g27', category: 'fashion', src: A('p19'), alt: 'Camila styling her wardrobe', caption: 'Wardrobe edit' },
+  { id: 'g28', category: 'lifestyle', src: A('p24'), alt: 'Camila in loungewear at home', caption: 'Lazy Sunday' },
 ];
 
 export const galleryFilters = ['All', 'Lifestyle', 'Fashion', 'Fitness', 'Travel'];

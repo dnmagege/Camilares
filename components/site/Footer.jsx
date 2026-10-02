@@ -17,6 +17,7 @@ const COLS = [
   {
     title: 'Discover',
     links: [
+      { key: 'work', label: 'Work With Me' },
       { key: 'gallery', label: 'Gallery' },
       { key: 'blog', label: 'Blog' },
       { key: 'shop', label: 'Shop' },

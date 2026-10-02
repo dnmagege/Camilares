@@ -189,6 +189,20 @@ backend:
         -working: true
         -agent: "testing"
         -comment: "✅ PASSED: GET /api/products returns 8 products. GET /api/products/p1 returns single product. GET /api/products/nope returns 404. No _id fields in responses."
+  - task: "Brand collaboration enquiry (POST /api/collab)"
+    implemented: true
+    working: true
+    file: "app/api/[[...path]]/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        -working: "NA"
+        -agent: "main"
+        -comment: "New 'Work With Camila' business enquiry. Validates name+valid email+message (400 otherwise). Stores name/company/email/campaignType/budget/message with UUID in collaboration_enquiries."
+        -working: true
+        -agent: "testing"
+        -comment: "✅ PASSED: All test cases passed. (1) Valid submission with all fields returns 200 with success message. (2) Missing name returns 400 with error. (3) Invalid email 'notanemail' returns 400 with error. (4) Missing message returns 400 with error. (5) Valid submission WITHOUT optional fields (company, budget) returns 200 with success. (6) No _id field leaked in any response. (7) Documents stored in collaboration_enquiries collection with UUID id field. Regression check: POST /api/contact and POST /api/newsletter still working correctly (both return 200 on valid payloads)."
   - task: "Analytics event tracking (POST /api/analytics)"
     implemented: true
     working: true
@@ -220,7 +234,7 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
   run_ui: false
 
 test_plan:
@@ -234,3 +248,7 @@ agent_communication:
     -message: "Backend implemented in single catch-all route.js using MONGO_URL + DB_NAME. All docs use UUID string ids (no ObjectId). Please test all endpoints: valid + invalid cases (newsletter needs consent=true and valid email; contact needs name/email/message). Verify auto-seeding works on first GET for blog/gallery/products and that blog list omits body while single includes body + related. Base URL for API is the ingress /api prefix."
     -agent: "testing"
     -message: "✅ ALL BACKEND TESTS PASSED (7/7). Tested all API endpoints with valid and invalid cases. Confirmed: (1) All endpoints return correct status codes, (2) No _id fields leak in any responses, (3) All documents use UUID string ids, (4) Validation works correctly (newsletter requires valid email + consent, contact requires name/email/message), (5) Auto-seeding works for blog/gallery/products, (6) Blog list omits body field while single post includes body array, (7) Related posts are same category and different slug, (8) 404 responses for non-existent resources. Backend is fully functional and ready for production."
+    -agent: "main"
+    -message: "Added new brand collaboration endpoint POST /api/collab. Validates name+email+message (required), company+campaignType+budget (optional). Stores in collaboration_enquiries with UUID. Please test the new endpoint."
+    -agent: "testing"
+    -message: "✅ NEW COLLAB ENDPOINT PASSED (8/8 total). Tested POST /api/collab with all required scenarios: (1) Valid submission with all fields → 200 with success, (2) Missing name → 400 with error, (3) Invalid email 'notanemail' → 400 with error, (4) Missing message → 400 with error, (5) Valid submission without optional fields (company, budget) → 200 with success, (6) No _id leaked in responses, (7) Documents stored with UUID in collaboration_enquiries collection. Regression check confirmed POST /api/contact and POST /api/newsletter still working correctly. All backend endpoints fully functional."
