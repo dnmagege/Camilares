@@ -14,7 +14,10 @@ export function opt(url, w = 1200) {
 }
 
 // Camila editorial photos
-const HERO_IMG = '/camila/hero.jpg';         // reclining golden-hour coastline (landscape)
+const HERO_IMG = '/camila/new/hero-positano.jpg'; // Positano floral dress (hero)
+const RECLINE = '/camila/hero.jpg';          // reclining golden-hour coastline
+const AUTUMN_CAFE = '/camila/new/autumn-cafe.jpg';
+const RAINY_STREET = '/camila/new/rainy-street.jpg';
 const ABOUT_IMG = '/camila/about.jpg';       // over-the-shoulder portrait
 const FASHION_IMG = '/camila/fashion.jpg';   // backlit editorial portrait
 const LIFESTYLE_IMG = '/camila/lifestyle.jpg'; // relaxed golden-hour (landscape)
@@ -38,10 +41,10 @@ const FIT1 = 'https://images.unsplash.com/photo-1627483298606-cf54c61779a9?crop=
 const FIT2 = 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?crop=entropy&cs=srgb&fm=jpg&q=85';
 
 export const heroImage = HERO_IMG;
-export const aboutImage = ABOUT_IMG;
+export const aboutImage = A('p16');
 
 export const features = [
-  { key: 'lifestyle', title: 'Lifestyle', description: 'Slow mornings, cosy corners and the small rituals that make a day feel intentional.', image: A('p16') },
+  { key: 'lifestyle', title: 'Lifestyle', description: 'Slow mornings, cosy corners and the small rituals that make a day feel intentional.', image: AUTUMN_CAFE },
   { key: 'fashion', title: 'Fashion', description: 'Elevated everyday looks, seasonal edits and the accessories that pull it together.', image: FASHION_IMG },
   { key: 'fitness', title: 'Fitness', description: 'Movement as self-care — mindful workouts, wellness rituals and gentle strength.', image: A('p18') },
   { key: 'travel', title: 'Travel', description: 'Dreamy destinations, hidden corners and the stories collected along the way.', image: TRAVEL_IMG },
@@ -49,7 +52,7 @@ export const features = [
 
 export const latestContent = [
   { category: 'Fashion', title: 'Autumn Layers I’m Loving', date: 'Jun 2, 2025', image: A('p06') },
-  { category: 'Travel', title: 'A Slow Morning by the Sea', date: 'May 28, 2025', image: HERO_IMG },
+  { category: 'Travel', title: 'A Slow Morning by the Sea', date: 'May 28, 2025', image: RECLINE },
   { category: 'Fitness', title: 'Reset: My Wellness Ritual', date: 'May 21, 2025', image: A('p18') },
   { category: 'Lifestyle', title: 'Blush Tones & Quiet Days', date: 'May 14, 2025', image: A('p16') },
   { category: 'Fashion', title: 'Accessories That Elevate', date: 'May 7, 2025', image: A('p08') },
@@ -81,7 +84,7 @@ export const categories = {
     key: 'travel', title: 'Travel', tagline: 'Collecting stories, one destination at a time',
     intro: 'Dreamy coastlines, quiet corners and city escapes — travel diaries designed to inspire your next slow adventure.',
     hero: opt(TRV3, 1600),
-    grid: [TRAVEL_IMG, A('p27'), A('p10'), HERO_IMG, opt(TRV1), opt(TRV2)],
+    grid: [TRAVEL_IMG, A('p27'), A('p10'), RECLINE, opt(TRV1), opt(TRV2)],
   },
 };
 
@@ -93,7 +96,7 @@ export const galleryItems = [
   { id: 'g5', category: 'fashion', src: A('p06'), alt: 'Camila walking the city in autumn layers', caption: 'Autumn in the city' },
   { id: 'g6', category: 'lifestyle', src: A('p07'), alt: 'Camila reading at a café', caption: 'Slow afternoons' },
   { id: 'g7', category: 'lifestyle', src: A('p09'), alt: 'Camila with cocoa on a rainy café day', caption: 'Rainy-day cocoa' },
-  { id: 'g8', category: 'travel', src: HERO_IMG, alt: 'Camila reclining by the coast at sunset', caption: 'By the coast' },
+  { id: 'g8', category: 'travel', src: RECLINE, alt: 'Camila reclining by the coast at sunset', caption: 'By the coast' },
   { id: 'g9', category: 'fashion', src: A('p08'), alt: 'Camila on a coffee run', caption: 'Coffee run' },
   { id: 'g10', category: 'travel', src: A('p10'), alt: 'Camila in a sundress at a sunny café', caption: 'La dolce vita' },
   { id: 'g11', category: 'fashion', src: ABOUT_IMG, alt: 'Soft-light portrait of Camila', caption: 'Soft light' },
@@ -114,6 +117,7 @@ export const galleryItems = [
   { id: 'g26', category: 'lifestyle', src: A('p28'), alt: 'Camila relaxing by candlelight', caption: 'Candlelight' },
   { id: 'g27', category: 'fashion', src: A('p19'), alt: 'Camila styling her wardrobe', caption: 'Wardrobe edit' },
   { id: 'g28', category: 'lifestyle', src: A('p24'), alt: 'Camila in loungewear at home', caption: 'Lazy Sunday' },
+  { id: 'g29', category: 'fashion', src: RAINY_STREET, alt: 'Camila with an umbrella on a rainy autumn street', caption: 'Rainy day in the city' },
 ];
 
 export const galleryFilters = ['All', 'Lifestyle', 'Fashion', 'Fitness', 'Travel'];
@@ -167,7 +171,7 @@ export const blogSeed = [
 
 export const productSeed = [
   { id: 'p1', name: 'Mobile Wallpaper Pack', category: 'Wallpapers', type: 'digital', price: 9, image: A('p16'), description: '12 hand-picked blush & cream wallpapers for your phone.' },
-  { id: 'p2', name: 'Desktop Wallpaper Set', category: 'Wallpapers', type: 'digital', price: 12, image: HERO_IMG, description: 'A calm, editorial set of desktop backgrounds in 4K.' },
+  { id: 'p2', name: 'Desktop Wallpaper Set', category: 'Wallpapers', type: 'digital', price: 12, image: RECLINE, description: 'A calm, editorial set of desktop backgrounds in 4K.' },
   { id: 'p3', name: 'Everyday Style Guide (eBook)', category: 'Guides', type: 'digital', price: 19, image: FASHION_IMG, description: 'Build an effortless capsule wardrobe, step by step.' },
   { id: 'p4', name: '7-Day Wellness Reset', category: 'Guides', type: 'digital', price: 24, image: A('p18'), description: 'A gentle week of movement, meals and mindful rituals.' },
   { id: 'p5', name: 'Creator Presets Pack', category: 'Creator Resources', type: 'digital', price: 29, image: A('p05'), description: '10 warm, editorial presets for a signature look.' },

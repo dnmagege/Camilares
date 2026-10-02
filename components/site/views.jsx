@@ -57,7 +57,7 @@ export function HomeView({ go }) {
     <>
       {/* Hero */}
       <section className="relative flex min-h-screen items-center overflow-hidden bg-charcoal">
-        <img src={heroImage} alt="Camila Reyes" className="absolute inset-0 h-full w-full object-cover" />
+        <img src={heroImage} alt="Camila Reyes" className="absolute inset-0 h-full w-full object-cover object-top" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal/75 via-charcoal/40 to-transparent" />
         <Container className="relative z-10 py-32 text-cream">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} className="max-w-2xl">
