@@ -31,7 +31,7 @@ import {
 function PageHero({ image, eyebrow, title, subtitle }) {
   return (
     <section className="relative flex min-h-[56vh] items-end overflow-hidden pt-24 bg-charcoal">
-      <img src={image} alt={title} className="absolute inset-0 h-full w-full object-cover" />
+      <img src={image} alt={title} className="absolute inset-0 h-full w-full object-cover object-top" />
       <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/30 to-charcoal/20" />
       <Container className="relative z-10 pb-14 text-cream">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>

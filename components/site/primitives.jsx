@@ -155,7 +155,7 @@ export function BlogCard({ post, index = 0, onClick }) {
   return (
     <Reveal delay={index * 0.06}>
       <article onClick={onClick} className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all hover:shadow-lg hover:shadow-charcoal/5">
-        <SmartImage src={post.cover} alt={post.title} className="aspect-[16/10]" imgClassName="group-hover:scale-105" />
+        <SmartImage src={post.cover} alt={post.title} className="aspect-[16/10]" imgClassName="object-top group-hover:scale-105" />
         <div className="space-y-3 p-6">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
             <span className="tracking-luxe uppercase">{post.category}</span>
