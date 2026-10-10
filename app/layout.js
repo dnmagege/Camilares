@@ -1,31 +1,33 @@
 import './globals.css'
 import { Providers } from './providers'
+import { heroImages } from '@/data/hero-image-manifest'
 
-const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://camilares.com'
+const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://camilaravelle.com'
 
 export const metadata = {
   metadataBase: new URL(BASE),
   title: {
-    default: 'Camila Reyes — Lifestyle • Fashion • Fitness • Travel',
-    template: '%s | Camila Reyes',
+    default: 'Camila Ravelle — Lifestyle • Fashion • Fitness • Travel',
+    template: '%s | Camila Ravelle',
   },
   description:
-    'A fictional AI creator sharing everyday moments, fashion, fitness and travel experiences. Premium lifestyle stories from Camila Reyes.',
-  keywords: ['Camila Reyes', 'lifestyle', 'fashion', 'fitness', 'travel', 'AI creator', 'digital creator'],
-  authors: [{ name: 'Camila Reyes' }],
+    'A fictional AI creator sharing everyday moments, fashion, fitness and travel experiences. Premium lifestyle stories from Camila Ravelle.',
+  alternates: { canonical: '/' },
+  keywords: ['Camila Ravelle', 'lifestyle', 'fashion', 'fitness', 'travel', 'AI creator', 'digital creator'],
+  authors: [{ name: 'Camila Ravelle' }],
   openGraph: {
     type: 'website',
-    title: 'Camila Reyes — Lifestyle • Fashion • Fitness • Travel',
+    title: 'Camila Ravelle — Lifestyle • Fashion • Fitness • Travel',
     description: 'A fictional AI creator sharing lifestyle, fashion, fitness and travel inspired stories.',
     url: BASE,
-    siteName: 'Camila Reyes',
-    images: [{ url: 'https://images.unsplash.com/photo-1579809011670-aa21121f5ec6?auto=format&fit=crop&w=1200&q=80', width: 1200, height: 630, alt: 'Camila Reyes' }],
+    siteName: 'Camila Ravelle',
+    images: [{ url: heroImages[0].src, width: 1672, height: 941, alt: heroImages[0].alt }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Camila Reyes — Lifestyle • Fashion • Fitness • Travel',
+    title: 'Camila Ravelle — Lifestyle • Fashion • Fitness • Travel',
     description: 'A fictional AI creator sharing lifestyle, fashion, fitness and travel inspired stories.',
-    images: ['https://images.unsplash.com/photo-1579809011670-aa21121f5ec6?auto=format&fit=crop&w=1200&q=80'],
+    images: [heroImages[0].src],
   },
   robots: { index: true, follow: true },
 }
@@ -33,8 +35,8 @@ export const metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Camila Reyes',
-  description: 'A fictional AI-generated lifestyle creator. Camila Reyes is not a real person.',
+  name: 'Camila Ravelle',
+  description: 'A fictional AI-generated lifestyle creator. Camila Ravelle is not a real person.',
   disambiguatingDescription: 'Fictional AI-generated character',
   url: BASE,
   knowsAbout: ['Lifestyle', 'Fashion', 'Fitness', 'Travel'],

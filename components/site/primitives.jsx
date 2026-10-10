@@ -1,25 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Instagram, Youtube, Twitter, Music2, Sparkles, ArrowRight, Plus } from 'lucide-react'
+import { Sparkles, ArrowRight, Plus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Badge } from '@/components/ui/badge'
-import { toast } from 'sonner'
-
-// --- Analytics helper (fire-and-forget) -------------------------------------
-export function track(event, meta = {}) {
-  try {
-    fetch('/api/analytics', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ event, meta }),
-    }).catch(() => {})
-  } catch (_) {}
-}
 
 export function Container({ className, children }) {
   return <div className={cn('mx-auto w-full max-w-[1400px] px-6 md:px-10', className)}>{children}</div>
@@ -79,31 +65,39 @@ export function AIBadge({ className }) {
 }
 
 const socialMeta = {
-  instagram: { label: 'Instagram', Icon: Instagram },
-  tiktok: { label: 'TikTok', Icon: Music2 },
-  youtube: { label: 'YouTube', Icon: Youtube },
-  pinterest: { label: 'Pinterest', Icon: null },
-  x: { label: 'X', Icon: Twitter },
+  instagram: { label: 'Instagram', classes: 'bg-gradient-to-tr from-amber-400 via-pink-500 to-purple-600 text-white' },
+  tiktok: { label: 'TikTok', classes: 'bg-[#111111] text-white' },
 }
 
 export function SocialLinks({ social = {}, className, onClick }) {
-  const entries = Object.entries(social).filter(([, url]) => url)
+  const entries = ['instagram', 'tiktok'].filter((key) => social[key])
   return (
     <div className={cn('flex items-center gap-2.5', className)}>
-      {entries.map(([key, url]) => {
-        const meta = socialMeta[key] || { label: key, Icon: null }
-        const Icon = meta.Icon
+      {entries.map((key) => {
+        const meta = socialMeta[key]
         return (
           <a
             key={key}
-            href={url}
+            href={social[key]}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={meta.label}
             onClick={() => onClick?.(key)}
-            className="grid h-10 w-10 place-items-center rounded-full border border-border bg-card/60 text-foreground/80 transition-all hover:bg-primary hover:text-primary-foreground hover:-translate-y-0.5"
+            className={cn('grid h-10 w-10 place-items-center rounded-full shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-md', meta.classes)}
           >
-            {Icon ? <Icon className="h-[18px] w-[18px]" /> : <span className="text-sm font-medium">{meta.label[0]}</span>}
+            {key === 'instagram' ? (
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[21px] w-[21px]" fill="none" stroke="currentColor" strokeWidth="1.8">
+                <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5.25" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.65" cy="6.55" r="1" fill="currentColor" stroke="none" />
+              </svg>
+            ) : (
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-[21px] w-[21px]">
+                <path d="M14.2 3.2h3.1c.2 2.1 1.4 3.7 3.5 4.3v3.2a9.5 9.5 0 0 1-3.5-1.2v6.2a6.1 6.1 0 1 1-6.1-6.1c.5 0 1 .1 1.5.2v3.4a2.8 2.8 0 1 0 1.6 2.5V3.2Z" fill="#25F4EE" transform="translate(-1 1)" />
+                <path d="M14.2 3.2h3.1c.2 2.1 1.4 3.7 3.5 4.3v3.2a9.5 9.5 0 0 1-3.5-1.2v6.2a6.1 6.1 0 1 1-6.1-6.1c.5 0 1 .1 1.5.2v3.4a2.8 2.8 0 1 0 1.6 2.5V3.2Z" fill="#FE2C55" transform="translate(1 -1)" />
+                <path d="M14.2 3.2h3.1c.2 2.1 1.4 3.7 3.5 4.3v3.2a9.5 9.5 0 0 1-3.5-1.2v6.2a6.1 6.1 0 1 1-6.1-6.1c.5 0 1 .1 1.5.2v3.4a2.8 2.8 0 1 0 1.6 2.5V3.2Z" fill="white" />
+              </svg>
+            )}
           </a>
         )
       })}
@@ -151,10 +145,11 @@ export function ContentCard({ item, index = 0, onClick }) {
   )
 }
 
-export function BlogCard({ post, index = 0, onClick }) {
+export function BlogCard({ post, index = 0 }) {
   return (
     <Reveal delay={index * 0.06}>
-      <article onClick={onClick} className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all hover:shadow-lg hover:shadow-charcoal/5">
+      <article className="overflow-hidden rounded-2xl border border-border bg-card transition-all hover:shadow-lg hover:shadow-charcoal/5">
+        <Link href={`/blog/${encodeURIComponent(post.slug)}`} className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
         <SmartImage src={post.cover} alt={post.title} className="aspect-[16/10]" imgClassName="object-top group-hover:scale-105" />
         <div className="space-y-3 p-6">
           <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -168,6 +163,7 @@ export function BlogCard({ post, index = 0, onClick }) {
             Read article <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </span>
         </div>
+        </Link>
       </article>
     </Reveal>
   )
@@ -195,56 +191,3 @@ export function ProductCard({ product, index = 0, onOpen, onAdd }) {
   )
 }
 
-export function NewsletterForm({ compact, source = 'website', className }) {
-  const [email, setEmail] = useState('')
-  const [consent, setConsent] = useState(false)
-  const [loading, setLoading] = useState(false)
-
-  const submit = async (e) => {
-    e.preventDefault()
-    if (!consent) return toast.error('Please accept to receive emails.')
-    setLoading(true)
-    try {
-      const res = await fetch('/api/newsletter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, consent, source }),
-      })
-      const data = await res.json()
-      if (res.ok && data.success) {
-        toast.success(data.message || 'Subscribed!')
-        track('newsletter_signup', { source })
-        setEmail('')
-        setConsent(false)
-      } else {
-        toast.error(data.error || 'Something went wrong.')
-      }
-    } catch (_) {
-      toast.error('Network error, please try again.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <form onSubmit={submit} className={cn('w-full', className)}>
-      <div className="flex flex-col sm:flex-row gap-3">
-        <Input
-          type="email"
-          required
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="your@email.com"
-          className="h-12 rounded-full bg-card px-5"
-        />
-        <Button type="submit" disabled={loading} className="h-12 rounded-full px-7">
-          {loading ? 'Joining…' : 'Subscribe'}
-        </Button>
-      </div>
-      <label className="mt-3 flex items-start gap-2.5 text-xs text-muted-foreground">
-        <Checkbox checked={consent} onCheckedChange={(v) => setConsent(!!v)} className="mt-0.5" />
-        <span>I agree to receive newsletters and accept the privacy policy. Unsubscribe anytime.</span>
-      </label>
-    </form>
-  )
-}

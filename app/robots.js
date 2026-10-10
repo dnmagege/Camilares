@@ -1,4 +1,4 @@
-const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://camilares.com'
+const BASE = process.env.NEXT_PUBLIC_BASE_URL || 'https://camilaravelle.com'
 
 export default function robots() {
   return {

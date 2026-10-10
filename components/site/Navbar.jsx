@@ -1,12 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
-import { Container, track } from './primitives'
-import site from '@/config/site'
+import { Container } from './primitives'
 
 const NAV = [
   { key: 'about', label: 'About' },
@@ -15,8 +14,9 @@ const NAV = [
   { key: 'fitness', label: 'Fitness' },
   { key: 'travel', label: 'Travel' },
   { key: 'gallery', label: 'Gallery' },
-  { key: 'blog', label: 'Blog' },
-  { key: 'work', label: 'Work With Me' },
+  { key: 'blog', label: 'Journal' },
+  { key: 'contact', label: 'Contact' },
+  { key: 'premium', label: 'Premium' },
 ]
 
 export default function Navbar({ route, go }) {
@@ -43,16 +43,11 @@ export default function Navbar({ route, go }) {
       )}
     >
       <Container className="flex items-center justify-between">
-        <button onClick={() => nav('home')} className="flex flex-col leading-none">
-          <span className="font-serif-i text-xl md:text-2xl font-semibold tracking-wide text-foreground">
-            CAMILA REYES
-          </span>
-          <span className="mt-0.5 hidden sm:block text-[10px] tracking-luxe uppercase text-muted-foreground">
-            Lifestyle &middot; Fashion &middot; Fitness &middot; Travel
-          </span>
+        <button onClick={() => nav('home')} className="flex shrink-0 items-center" aria-label="Camila Ravelle home">
+          <img src="/camila/camila-ravelle-logo.png" alt="Camila Ravelle" className="h-[58px] w-[92px] object-contain sm:h-[66px] sm:w-[110px]" />
         </button>
 
-        <nav className="hidden lg:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-4 2xl:gap-7">
           {NAV.map((item) => (
             <button
               key={item.key}
@@ -68,36 +63,22 @@ export default function Navbar({ route, go }) {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="rounded-full text-muted-foreground"
-            onClick={() => { track('premium_click', { from: 'navbar' }); nav('premium') }}
-          >
-            Premium
-          </Button>
-          <Button
-            size="sm"
-            className="rounded-full px-5"
-            onClick={() => nav('work')}
-          >
-            Work With Me
-          </Button>
-        </div>
+        <Button onClick={() => nav('contact')} className="hidden rounded-full px-3 text-xs lg:inline-flex 2xl:px-5 2xl:text-sm">
+          Let’s Work Together <span aria-hidden="true" className="ml-1">→</span>
+        </Button>
 
         {/* Mobile */}
         <div className="lg:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
+              <Button variant="ghost" size="icon" className="rounded-full" aria-label="Open navigation menu" aria-expanded={open}>
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] bg-background">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <div className="mt-6 flex flex-col gap-1">
-                {[{ key: 'home', label: 'Home' }, ...NAV, { key: 'shop', label: 'Shop' }, { key: 'contact', label: 'Contact' }, { key: 'premium', label: 'Premium' }].map((item) => (
+                {[{ key: 'home', label: 'Home' }, ...NAV].map((item) => (
                   <button
                     key={item.key}
                     onClick={() => nav(item.key)}
@@ -109,10 +90,9 @@ export default function Navbar({ route, go }) {
                     {item.label}
                   </button>
                 ))}
-                <div className="mt-4 flex flex-col gap-2">
-                  <Button className="rounded-full" onClick={() => nav('work')}>Work With Me</Button>
-                  <Button variant="outline" className="rounded-full" onClick={() => nav('premium')}>Premium</Button>
-                </div>
+                <Button onClick={() => nav('contact')} className="mt-3 rounded-full">
+                  Let’s Work Together <span aria-hidden="true" className="ml-1">→</span>
+                </Button>
               </div>
             </SheetContent>
           </Sheet>

@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Premium creator platform for fictional AI creator Camila Reyes (camilares.com). Next.js + MongoDB. Newsletter, contact, blog, gallery, products, analytics APIs. Public brand config endpoint."
+user_problem_statement: "Premium creator platform for fictional AI creator Camila Ravelle (camilares.com). Next.js + MongoDB. Newsletter, contact, blog, gallery, products, analytics APIs. Public brand config endpoint."
 
 backend:
   - task: "Brand config endpoint (GET /api/config)"

@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """
-Backend API Test Suite for Camila Reyes Platform
+Backend API Test Suite for Camila Ravelle Platform
 Tests all API endpoints with valid and invalid cases
 """
 
 import requests
 import json
+import os
 import random
 import string
 from datetime import datetime
 
-# Base URL from environment
-BASE_URL = "https://creator-studio-586.preview.emergentagent.com/api"
+# Point API_BASE_URL at the local app or a dedicated test deployment.
+BASE_URL = os.environ.get("API_BASE_URL", "http://localhost:3000/api").rstrip("/")
 
 def random_email():
     """Generate a random email for testing"""
@@ -841,7 +842,7 @@ def test_regression_contact_newsletter():
 def main():
     """Run all tests"""
     print("\n" + "="*80)
-    print("CAMILA REYES BACKEND API TEST SUITE")
+    print("CAMILA RAVELLE BACKEND API TEST SUITE")
     print("="*80)
     print(f"Base URL: {BASE_URL}")
     print(f"Test started at: {datetime.now().isoformat()}")
