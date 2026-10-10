@@ -1,7 +1,6 @@
 const fs = require('node:fs')
 const os = require('node:os')
 const path = require('node:path')
-const sharp = require('sharp')
 
 const projectRoot = path.resolve(__dirname, '..')
 const sourceRoot = path.join(projectRoot, 'private-media', 'camila-review', 'categories')
@@ -32,6 +31,7 @@ async function main() {
     return
   }
 
+  const sharp = require('sharp')
   const inputs = []
   const outputNames = new Set()
   for (const category of publicSourceFolders) {
